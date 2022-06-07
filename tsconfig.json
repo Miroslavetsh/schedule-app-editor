@@ -15,8 +15,10 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
+    "jsxImportSource": "@emotion/react",
     "paths": {
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@src/*": ["src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
