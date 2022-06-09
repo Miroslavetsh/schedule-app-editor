@@ -1,11 +1,13 @@
 import type { NextPage } from 'next'
 import Container from '@mui/material/Container'
 
+import { ChooseTeacher } from '@components/Form'
+
 const Home: NextPage = () => {
   return (
-    <div>
-      <Container></Container>
-    </div>
+    <Container>
+      <ChooseTeacher />
+    </Container>
   )
 }
 
