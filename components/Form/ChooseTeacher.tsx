@@ -1,4 +1,4 @@
-import MultipleSelect from '@components/MultipleSelect'
+import SingleSelect from '../SingleSelect'
 import Form from './Form'
 
 const names = [
@@ -17,7 +17,13 @@ const names = [
 const ChooseTeacher = () => {
   return (
     <Form heading='Оберіть Викладача'>
-      <MultipleSelect placeholder='Оберіть Викладача' items={names} />
+      <SingleSelect
+        placeholder='Оберіть Викладача'
+        items={names}
+        linkText='Додати нового'
+        nextClickCallback={() => {}}
+        moveOnAddNew='/add-teacher'
+      />
     </Form>
   )
 }
