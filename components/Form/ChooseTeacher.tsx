@@ -14,12 +14,12 @@ const names = [
   'Kelly Snyder',
 ]
 
-const AddTeacher = () => {
+const ChooseTeacher = () => {
   return (
     <Form heading='Оберіть Викладача'>
-      <MultipleSelect placeholder='Оберіть Викладача' items={names}></MultipleSelect>
+      <MultipleSelect placeholder='Оберіть Викладача' items={names} />
     </Form>
   )
 }
 
-export default AddTeacher
+export default ChooseTeacher
