@@ -1,9 +1,11 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { Button } from '@mui/material'
+
+import Entity from '@models/Entity'
 
 const ITEM_HEIGHT = 48
 const ITEM_PADDING_TOP = 8
@@ -16,17 +18,21 @@ const MenuProps = {
   },
 }
 
-type PropTypes = {
-  items: Array<string>
+interface PropTypes<T extends Entity> {
+  items: Array<T>
+  fieldToDisplay: keyof T
   placeholder: string
   linkText: string
-  nextClickCallback: () => void
   moveOnAddNew: string
+  setItem: (value: T) => void
+  nextClickCallback: () => void
 }
 
-const SingleSelect: React.FC<PropTypes> = (props) => {
-  const { items, placeholder, linkText, nextClickCallback, moveOnAddNew } = props
-  const [selectValue, setSelectValue] = React.useState<string>('')
+const SingleSelect = <T extends Entity>(props: React.PropsWithChildren<PropTypes<T>>) => {
+  const { items, placeholder, linkText, nextClickCallback, moveOnAddNew, fieldToDisplay, setItem } =
+    props
+
+  const [selectValue, setSelectValue] = useState<string>('')
 
   const handleChange = (event: SelectChangeEvent<typeof selectValue>) => {
     const {
@@ -37,27 +43,32 @@ const SingleSelect: React.FC<PropTypes> = (props) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <FormControl sx={{ width: 300, mt: 3, mb: 2 }} required>
-        <Select
-          sx={{ mb: 1 }}
-          displayEmpty
-          value={selectValue}
-          onChange={handleChange}
-          input={<OutlinedInput />}
-          renderValue={(selected) => (selected.length === 0 ? <em>{placeholder}</em> : selected)}
-          MenuProps={MenuProps}>
-          <MenuItem disabled value=''>
-            <em>{placeholder}</em>
-          </MenuItem>
-
-          {items.map((item) => (
-            <MenuItem key={item} value={item}>
-              {item}
+      <FormControl sx={{ width: 300, mt: 3, mb: 2 }}>
+        {items && (
+          <Select
+            value={selectValue}
+            onChange={handleChange}
+            input={<OutlinedInput />}
+            renderValue={(selected) => (selected ? <>{selected}</> : <em>{placeholder}</em>)}
+            sx={{ mb: 1 }}
+            displayEmpty
+            MenuProps={MenuProps}>
+            <MenuItem disabled value=''>
+              <em>{placeholder}</em>
             </MenuItem>
-          ))}
-        </Select>
 
-        {selectValue && (
+            {items.map((item: T) => (
+              <MenuItem key={item.id} value={item[fieldToDisplay]} onClick={() => setItem(item)}>
+                {/* @ts-ignore */}
+                {item[fieldToDisplay]}
+              </MenuItem>
+            ))}
+          </Select>
+        )}
+
+        {!items && <>Не маю жодного запису :&#40;</>}
+
+        {selectValue && selectValue && (
           <Button onClick={nextClickCallback} variant='contained'>
             Підтвердити
           </Button>

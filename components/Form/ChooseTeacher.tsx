@@ -1,29 +1,39 @@
+import React, { useState } from 'react'
+
+import Teacher from 'models/Teacher'
 import SingleSelect from '../SingleSelect'
 import Form from './Form'
+import getItemsFromAPI from '@src/utils/getItemsFromAPI'
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-]
+type PropTypes = {
+  items: Array<Teacher>
+}
 
-const ChooseTeacher = () => {
+const ChooseTeacher: React.FC<PropTypes> = ({ items }) => {
+  const [item, setItem] = useState<Teacher>({} as Teacher)
+  const [subjects, setSubjects] = useState<Array<object>>([])
+
+  const getListFromAPI = () => {
+    getItemsFromAPI(`subjects/get-by-teacher-id/${item.id}`).then((data) =>
+      setSubjects(JSON.parse(data)),
+    )
+  }
+
   return (
     <Form heading='Оберіть Викладача'>
-      <SingleSelect
+      <SingleSelect<Teacher>
+        setItem={setItem}
         placeholder='Оберіть Викладача'
-        items={names}
-        linkText='Додати нового'
-        nextClickCallback={() => {}}
+        items={items}
+        fieldToDisplay={'name'}
+        linkText='Додати нового Викладача'
+        nextClickCallback={getListFromAPI}
         moveOnAddNew='/add-teacher'
       />
+
+      {subjects?.map((s) => (
+        <React.Fragment key={JSON.stringify(s)}>{JSON.stringify(s)}</React.Fragment>
+      ))}
     </Form>
   )
 }
