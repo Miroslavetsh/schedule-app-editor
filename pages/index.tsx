@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Container from '@mui/material/Container'
 import Head from 'next/head'
 
-import { ChooseTeacher } from '@components/Form'
+import { ChooseTeacherForm } from '@components/Form'
 import getItemsFromAPI from '@src/utils/getItemsFromAPI'
 import Teacher from '@models/Teacher'
 
@@ -17,7 +17,7 @@ const Home: NextPage<PropTypes> = ({ items }) => {
         <title>Скедьюлер | Ваш Помічник</title>
       </Head>
 
-      <ChooseTeacher teachers={items} />
+      <ChooseTeacherForm teachers={items} />
     </Container>
   )
 }
