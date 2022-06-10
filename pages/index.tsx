@@ -17,7 +17,7 @@ const Home: NextPage<PropTypes> = ({ items }) => {
         <title>Скедьюлер | Ваш Помічник</title>
       </Head>
 
-      <ChooseTeacher items={items} />
+      <ChooseTeacher teachers={items} />
     </Container>
   )
 }
