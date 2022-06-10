@@ -27,8 +27,6 @@ const Block = <T extends Entity>({ items, heading, isLoading }: PropTypes<T>): J
             <div style={{ marginTop: 16, display: 'flex', flexWrap: 'wrap' }}>
               {items.map((s) => (
                 <Box sx={{ width: '33%' }} key={JSON.stringify(s)}>
-                  {s.id}
-                  <br />
                   {Object.values(s).map((v) => {
                     return (
                       <React.Fragment key={v.toString()}>
