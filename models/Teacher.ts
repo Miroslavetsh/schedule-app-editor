@@ -1,4 +1,5 @@
-export default interface Teacher {
-  id: string
+import Entity from "./Entity";
+
+export default interface Teacher extends Entity {
   name: string
 }
