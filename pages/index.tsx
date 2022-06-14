@@ -12,7 +12,7 @@ type PropTypes = {
 
 const Home: NextPage<PropTypes> = ({ items }) => {
   return (
-    <Container>
+    <Container sx={{ mt: 2 }}>
       <Head>
         <title>Скедьюлер | Ваш Помічник</title>
       </Head>

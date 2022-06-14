@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import Teacher from '@models/Teacher'
 import Subject from '@models/Subject'
@@ -17,14 +17,16 @@ const ChooseTeacher: React.FC<PropTypes> = ({ teachers }) => {
   const [nameInHeading, setNameInHeading] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const getSubjectsListFromAPI = () => {
-    setIsLoading(true)
+  const items = useMemo(
+    async () => await getItemsFromAPI(`subjects/get-by-teacher-id/${teacher.id}`),
+    [teacher.id],
+  )
 
-    getItemsFromAPI(`subjects/get-by-teacher-id/${teacher.id}`).then((data) => {
-      setSubjects(JSON.parse(data))
-      setNameInHeading(teacher.name)
-      setIsLoading(false)
-    })
+  const getSubjectsListFromAPI = async () => {
+    setIsLoading(true)
+    setSubjects(JSON.parse(await items))
+    setNameInHeading(teacher.name)
+    setIsLoading(false)
   }
 
   return (
@@ -33,7 +35,7 @@ const ChooseTeacher: React.FC<PropTypes> = ({ teachers }) => {
         setItem={setTeacher}
         placeholder='Оберіть Викладача'
         items={teachers}
-        fieldToDisplay={'name'}
+        fieldToDisplay='name'
         linkText='Додати нового'
         nextClickCallback={getSubjectsListFromAPI}
         moveOnAddNew='/add-teacher'
