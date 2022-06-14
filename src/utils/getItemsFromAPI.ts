@@ -1,5 +1,7 @@
-export default async (path: string) => {
-  const url = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/${path}`
+const EP = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/`
+
+export default async (...paths: Array<string>) => {
+  const url = paths.length === 0 ? EP : EP + `${paths.join('/')}`
 
   const response = await fetch(url, {
     mode: 'cors',

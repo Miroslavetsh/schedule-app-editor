@@ -1,11 +1,14 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
-import Teacher from '@models/Teacher'
-import Subject from '@models/Subject'
-import getItemsFromAPI from '@src/utils/getItemsFromAPI'
 import { FormPattern } from '@components/Form'
 import SingleSelect from '@components/SingleSelect'
 import Block from '@components/Block'
+
+import Subject from '@models/Subject'
+import Teacher from '@models/Teacher'
+
+import getItemsFromAPI from '@src/utils/getItemsFromAPI'
+import curry from '@src/utils/curry'
 
 type PropTypes = {
   teachers: Array<Teacher>
@@ -17,14 +20,16 @@ const ChooseTeacher: React.FC<PropTypes> = ({ teachers }) => {
   const [nameInHeading, setNameInHeading] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const items = useMemo(
-    async () => await getItemsFromAPI(`subjects/get-by-teacher-id/${teacher.id}`),
+  const getSubjects = useMemo(
+    async () =>
+      teacher.id &&
+      (await curry<string>(getItemsFromAPI)('subjects', 'get-by-teacher-id', teacher.id)),
     [teacher.id],
   )
 
   const getSubjectsListFromAPI = async () => {
     setIsLoading(true)
-    setSubjects(JSON.parse(await items))
+    setSubjects(JSON.parse(await getSubjects))
     setNameInHeading(teacher.name)
     setIsLoading(false)
   }
