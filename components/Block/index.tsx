@@ -17,32 +17,32 @@ const Block = <T extends Entity>({ items, heading, isLoading }: PropTypes<T>): J
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <CircularProgress />
         </Box>
+      ) : items.length > 0 ? (
+        <>
+          <Typography variant='h5' component='h5' fontWeight={700}>
+            {heading}
+          </Typography>
+
+          <div style={{ marginTop: 16, display: 'flex', flexWrap: 'wrap' }}>
+            {items.map((s) => (
+              <Box sx={{ width: '33%' }} key={JSON.stringify(s)}>
+                {Object.values(s).map((v) => {
+                  return (
+                    <React.Fragment key={v.toString()}>
+                      {v}
+                      <br />
+                    </React.Fragment>
+                  )
+                })}
+
+                <br />
+                <br />
+              </Box>
+            ))}
+          </div>
+        </>
       ) : (
-        items.length > 0 && (
-          <>
-            <Typography variant='h5' component='h5' fontWeight={700}>
-              {heading}
-            </Typography>
-
-            <div style={{ marginTop: 16, display: 'flex', flexWrap: 'wrap' }}>
-              {items.map((s) => (
-                <Box sx={{ width: '33%' }} key={JSON.stringify(s)}>
-                  {Object.values(s).map((v) => {
-                    return (
-                      <React.Fragment key={v.toString()}>
-                        {v}
-                        <br />
-                      </React.Fragment>
-                    )
-                  })}
-
-                  <br />
-                  <br />
-                </Box>
-              ))}
-            </div>
-          </>
-        )
+        <div>Наразі Порожньо :&#40;</div>
       )}
     </div>
   )
