@@ -25,7 +25,7 @@ interface PropTypes<T extends Entity> {
   linkText: string
   moveOnAddNew: string
   setItem: (value: T) => void
-  nextClickCallback: () => void
+  nextClickCallback?: () => void
 }
 
 const SingleSelect = <T extends Entity>(props: React.PropsWithChildren<PropTypes<T>>) => {
@@ -68,7 +68,7 @@ const SingleSelect = <T extends Entity>(props: React.PropsWithChildren<PropTypes
 
         {!items && <>Не маю жодного запису :&#40;</>}
 
-        {selectValue && selectValue && (
+        {selectValue && selectValue && nextClickCallback && (
           <Button onClick={nextClickCallback} variant='contained'>
             Підтвердити
           </Button>

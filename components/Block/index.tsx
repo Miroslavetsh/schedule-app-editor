@@ -1,8 +1,8 @@
-import React from 'react'
 import { CircularProgress, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 
 import Entity from '@models/Entity'
+import ObjectTemplate from '@components/Object'
 
 type PropTypes<T extends Entity> = {
   items: Array<T>
@@ -24,19 +24,9 @@ const Block = <T extends Entity>({ items, heading, isLoading }: PropTypes<T>): J
           </Typography>
 
           <div style={{ marginTop: 16, display: 'flex', flexWrap: 'wrap' }}>
-            {items.map((s) => (
-              <Box sx={{ width: '33%' }} key={JSON.stringify(s)}>
-                {Object.values(s).map((v) => {
-                  return (
-                    <React.Fragment key={v.toString()}>
-                      {v}
-                      <br />
-                    </React.Fragment>
-                  )
-                })}
-
-                <br />
-                <br />
+            {items.map((entity) => (
+              <Box sx={{ width: '33%' }} key={JSON.stringify(entity)}>
+                <ObjectTemplate<T> entity={entity} />
               </Box>
             ))}
           </div>
