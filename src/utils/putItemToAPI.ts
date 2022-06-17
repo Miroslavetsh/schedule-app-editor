@@ -7,7 +7,10 @@ export default async (item: object, ...paths: Array<string>) => {
     mode: 'cors',
     method: 'PUT',
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': 'https://localhost:63343',
+      'Access-Control-Allow-Methods': 'PUT, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
     },
     body: JSON.stringify(item),
   })
