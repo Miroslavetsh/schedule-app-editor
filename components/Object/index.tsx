@@ -1,5 +1,5 @@
 import Entity from '@models/Entity'
-import Link from '@components/Link'
+import Link from '@components/NextLink'
 
 type ObjectTemplateProps<T extends Entity> = { entity: T }
 
