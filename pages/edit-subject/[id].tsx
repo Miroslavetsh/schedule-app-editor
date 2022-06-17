@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Container } from '@mui/system'
 import { Button, Input } from '@mui/material'
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
-import { ParsedUrlQuery } from 'querystring'
 
 import Subject from '@models/Subject'
 import curry from '@src/utils/curry'
@@ -38,7 +37,7 @@ const EditSubject: NextPage<PropTypes> = ({ subject }) => {
   return (
     <Container sx={{ mt: 2 }}>
       <Head>
-        <title>{item.name}</title>
+        <title>{subject.name}</title>
       </Head>
 
       <Input
@@ -77,23 +76,12 @@ const EditSubject: NextPage<PropTypes> = ({ subject }) => {
   )
 }
 
-interface QParams extends ParsedUrlQuery {
-  id: string
-}
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { id } = context.params as { id: string }
   const subject = await curry<string>(getItemsFromAPI)('subjects', id)
 
   return {
     props: { subject },
-  }
-}
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [{ params: { id: 'subj-1' } }],
-    fallback: true,
   }
 }
 
