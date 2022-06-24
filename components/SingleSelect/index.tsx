@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
@@ -20,19 +20,33 @@ const MenuProps = {
 
 interface PropTypes<T extends Entity> {
   items: Array<T>
-  fieldToDisplay: keyof T
+  fieldToDisplay: string
   placeholder: string
   linkText: string
   moveOnAddNew: string
   setItem: (value: T) => void
   nextClickCallback?: () => void
+  selected?: T
 }
 
 const SingleSelect = <T extends Entity>(props: React.PropsWithChildren<PropTypes<T>>) => {
-  const { items, placeholder, linkText, nextClickCallback, moveOnAddNew, fieldToDisplay, setItem } =
-    props
+  const {
+    items,
+    placeholder,
+    linkText,
+    nextClickCallback,
+    moveOnAddNew,
+    fieldToDisplay,
+    setItem,
+    selected,
+  } = props
 
   const [selectValue, setSelectValue] = useState<string>('')
+
+  useEffect(() => {
+    //@ts-ignore
+    selected && selected.hasOwnProperty(fieldToDisplay) && setSelectValue(selected[fieldToDisplay])
+  }, [selected, fieldToDisplay])
 
   const handleChange = (event: SelectChangeEvent<typeof selectValue>) => {
     const {
@@ -58,6 +72,7 @@ const SingleSelect = <T extends Entity>(props: React.PropsWithChildren<PropTypes
             </MenuItem>
 
             {items.map((item: T) => (
+              // @ts-ignore
               <MenuItem key={item.id} value={item[fieldToDisplay]} onClick={() => setItem(item)}>
                 {/* @ts-ignore */}
                 {item[fieldToDisplay]}

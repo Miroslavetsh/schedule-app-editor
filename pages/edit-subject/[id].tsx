@@ -61,9 +61,10 @@ const EditSubject: NextPage<PropTypes> = ({ subject }) => {
       <br />
 
       <SingleSelect<Teacher>
-        setItem={(teacher: Teacher) => setItem({ ...item, teacherId: teacher.id })}
-        placeholder='Оберіть Викладача'
         items={teachers}
+        selected={teachers.find((teacher) => teacher.id === item.teacherId)}
+        placeholder='Оберіть Викладача'
+        setItem={(teacher: Teacher) => setItem({ ...item, teacherId: teacher.id })}
         fieldToDisplay='name'
         linkText='Додати нового'
         moveOnAddNew='/add-teacher'
