@@ -6,9 +6,10 @@ type ObjectTemplateProps<T extends Entity> = { entity: T }
 const ObjectTemplate = <T extends Entity>({ entity }: ObjectTemplateProps<T>): JSX.Element => {
   return (
     <ul>
-      {Object.values(entity).map((field: object) => {
-        return <li key={field.toString()}>{field.toString()}</li>
-      })}
+      {Object.keys(entity).map(
+        // @ts-ignore
+        (field) => field !== 'id' && <li key={field.toString()}>{entity[field]}</li>,
+      )}
 
       <Link href={`edit-subject/${entity.id}`}>ed</Link>
       <br />
