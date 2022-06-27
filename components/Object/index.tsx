@@ -11,7 +11,7 @@ const ObjectTemplate = <T extends Entity>({ entity }: ObjectTemplateProps<T>): J
         (field) => field !== 'id' && <li key={field.toString()}>{entity[field]}</li>,
       )}
 
-      <Link href={`edit-subject/${entity.id}`}>ed</Link>
+      <Link href={`subjects/edit/${entity.id}`}>ed</Link>
       <br />
     </ul>
   )
