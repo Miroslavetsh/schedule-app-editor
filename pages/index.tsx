@@ -3,7 +3,7 @@ import Container from '@mui/material/Container'
 import Head from 'next/head'
 
 import { ChooseTeacherForm } from '@components/Form'
-import getItemsFromAPI from '@src/utils/getItemsFromAPI'
+import getItemsFromAPI from '@src/utils/services/getItemsFromAPI'
 import Teacher from '@models/Teacher'
 
 type PropTypes = {

@@ -7,7 +7,7 @@ import Block from '@components/Block'
 import Subject from '@models/Subject'
 import Teacher from '@models/Teacher'
 
-import getItemsFromAPI from '@src/utils/getItemsFromAPI'
+import getItemsFromAPI from '@src/utils/services/getItemsFromAPI'
 import curry from '@src/utils/curry'
 
 type PropTypes = {

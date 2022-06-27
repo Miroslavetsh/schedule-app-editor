@@ -6,10 +6,10 @@ import Head from 'next/head'
 
 import Subject from '@models/Subject'
 import curry from '@src/utils/curry'
-import getItemsFromAPI from '@src/utils/getItemsFromAPI'
+import getItemsFromAPI from '@src/utils/services/getItemsFromAPI'
 import SingleSelect from '@components/SingleSelect'
 import Teacher from '@models/Teacher'
-import postItemToAPI from '@src/utils/postItemToAPI'
+import postItemToAPI from '@src/utils/services/postItemToAPI'
 
 type PropTypes = {
   subject: Subject
