@@ -43,7 +43,7 @@ const ChooseTeacher: React.FC<PropTypes> = ({ teachers }) => {
         fieldToDisplay='name'
         linkText='Додати нового'
         nextClickCallback={getSubjectsListFromAPI}
-        moveOnAddNew='/add-teacher'
+        moveOnAddNew='/teachers/add'
       />
 
       <Block<Subject>

@@ -67,7 +67,7 @@ const EditSubject: NextPage<PropTypes> = ({ subject }) => {
         setItem={(teacher: Teacher) => setItem({ ...item, teacherId: teacher.id })}
         fieldToDisplay='name'
         linkText='Додати нового'
-        moveOnAddNew='/add-teacher'
+        moveOnAddNew='/teachers/add'
       />
 
       <br />

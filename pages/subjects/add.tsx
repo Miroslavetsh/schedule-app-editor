@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Container } from '@mui/system'
 import { Button, Input } from '@mui/material'
-import { GetServerSideProps, NextPage } from 'next'
+import { NextPage } from 'next'
 import Head from 'next/head'
 
 import Subject from '@models/Subject'
