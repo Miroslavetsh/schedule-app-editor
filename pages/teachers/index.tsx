@@ -2,33 +2,33 @@ import type { NextPage } from 'next'
 import Container from '@mui/material/Container'
 import Head from 'next/head'
 
-import Subject from '@models/Subject'
+import Teacher from '@models/Teacher'
 import getItemsFromAPI from '@src/utils/services/getItemsFromAPI'
 import Block from '@components/Block'
 
 type PropTypes = {
-  items: Array<Subject>
+  items: Array<Teacher>
 }
 
 const List: NextPage<PropTypes> = ({ items }) => {
   return (
     <Container sx={{ mt: 2 }}>
       <Head>
-        <title>Предмети</title>
+        <title>Викладачі</title>
       </Head>
 
-      <Block<Subject>
-        heading='Список Предметів'
+      <Block<Teacher>
+        heading='Список Викладачів'
         isLoading={false}
         items={items}
-        tableName='subjects'
+        tableName='teachers'
       />
     </Container>
   )
 }
 
 export async function getStaticProps() {
-  const items = await getItemsFromAPI('subjects')
+  const items = await getItemsFromAPI('teachers')
 
   return {
     props: { items },

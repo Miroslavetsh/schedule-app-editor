@@ -3,14 +3,21 @@ import { Box } from '@mui/system'
 
 import Entity from '@models/Entity'
 import ObjectTemplate from '@components/Object'
+import TableName from '@src/utils/TableName'
 
 type PropTypes<T extends Entity> = {
   items: Array<T>
   heading: string
   isLoading: boolean
+  tableName: TableName
 }
 
-const Block = <T extends Entity>({ items, heading, isLoading }: PropTypes<T>): JSX.Element => {
+const Block = <T extends Entity>({
+  items,
+  heading,
+  isLoading,
+  tableName,
+}: PropTypes<T>): JSX.Element => {
   return (
     <div>
       {isLoading ? (
@@ -26,7 +33,7 @@ const Block = <T extends Entity>({ items, heading, isLoading }: PropTypes<T>): J
           <div style={{ marginTop: 16, display: 'flex', flexWrap: 'wrap' }}>
             {items.map((entity) => (
               <Box sx={{ width: '33%' }} key={JSON.stringify(entity)}>
-                <ObjectTemplate<T> entity={entity} />
+                <ObjectTemplate<T> entity={entity} tableName={tableName} />
               </Box>
             ))}
           </div>
