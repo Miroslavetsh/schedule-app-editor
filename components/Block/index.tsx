@@ -1,9 +1,12 @@
-import { CircularProgress, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 
-import Entity from '@models/Entity'
 import ObjectTemplate from '@components/Object'
-import TableName from '@src/utils/TableName'
+import Loader from '@components/Loader'
+import Entity from '@models/Entity'
+import TableName from '@utils/TableName'
+
+import styles from 'Styles.module.scss'
 
 type PropTypes<T extends Entity> = {
   items: Array<T>
@@ -21,16 +24,14 @@ const Block = <T extends Entity>({
   return (
     <div>
       {isLoading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <CircularProgress />
-        </Box>
+        <Loader />
       ) : items.length > 0 ? (
         <>
           <Typography variant='h5' component='h5' fontWeight={700}>
             {heading}
           </Typography>
 
-          <div style={{ marginTop: 16, display: 'flex', flexWrap: 'wrap' }}>
+          <div className={styles.wrapper}>
             {items.map((entity) => (
               <Box sx={{ width: '33%' }} key={JSON.stringify(entity)}>
                 <ObjectTemplate<T> entity={entity} tableName={tableName} />
