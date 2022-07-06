@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+
 type PropTypes = {
   children?: ReactNode
   heading?: ReactNode
