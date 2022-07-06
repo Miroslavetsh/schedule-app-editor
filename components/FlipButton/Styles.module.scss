@@ -1,0 +1,52 @@
+@import '../../styles/constants.scss';
+
+$circleDimension: 80px;
+
+.container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+
+  perspective: 6000px;
+}
+
+.flipper {
+  position: absolute;
+
+  transition: .4s cubic-bezier(.775, .07, .575, .995);
+  transform-style: preserve-3d;
+
+  &:hover {
+    transform: rotateY(180deg);
+  }
+}
+
+.button {
+  width: $circleDimension;
+  height: $circleDimension;
+  backface-visibility: hidden;
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  font-size: 1em;
+  color: #fff;
+}
+
+.front {
+  background-color: $mainColor;
+  position: absolute;
+  z-index: 2;
+
+  transform: rotateY(0deg);
+}
+
+.back {
+  background-color: $darkenMainColor;
+  position: relative;
+
+  transform: rotateY(-180deg);
+}
