@@ -2,10 +2,10 @@ import axios from 'axios'
 import { JSDOM } from 'jsdom'
 
 export default async (fullName: string) => {
-  const [_, firstName, secondName] = fullName.split(' ')
-  const name = `${firstName} ${secondName}`
-
   try {
+    const [firstName, secondName] = fullName.split(' ').reverse()
+    const name = `${firstName} ${secondName}`
+
     const { data } = await axios.get('https://slovnyk.ua/names.php', {
       params: {
         name,
@@ -14,11 +14,15 @@ export default async (fullName: string) => {
 
     if (typeof data === 'string') {
       const parsedDocument = new JSDOM(data)
-      const name = parsedDocument.window.document.getElementById('Zvert1')?.textContent
+      const nameNode = parsedDocument.window.document.getElementById('Zvert1')
 
-      return name
+      if (nameNode === null) throw new Error('Node with id Zvert1 Not Found. For name ' + name)
+
+      return nameNode?.textContent
     }
-  } catch (e) {
+
     return name
+  } catch {
+    return fullName
   }
 }
