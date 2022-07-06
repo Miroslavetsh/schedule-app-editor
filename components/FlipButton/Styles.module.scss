@@ -16,6 +16,8 @@ $circleDimension: 80px;
 .flipper {
   position: absolute;
 
+  cursor: pointer;
+
   transition: .4s cubic-bezier(.775, .07, .575, .995);
   transform-style: preserve-3d;
 
@@ -30,7 +32,6 @@ $circleDimension: 80px;
   backface-visibility: hidden;
 
   border-radius: 50%;
-  cursor: pointer;
 
   font-size: 1em;
   color: #fff;

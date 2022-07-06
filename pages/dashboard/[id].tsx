@@ -20,7 +20,7 @@ const Dashboard: NextPage<PropTypes> = ({ fullName }) => {
 
       <h2>Ваш Дешборд, {fullName}</h2>
 
-      {/* <FlipButton onClick={() => {}} frontContent='Є аккаунт?' backContent='Увійти'></FlipButton> */}
+      <FlipButton onClick={() => {}} frontContent='Є аккаунт?' backContent='Увійти' />
     </Container>
   )
 }

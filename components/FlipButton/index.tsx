@@ -14,14 +14,10 @@ const FlipButton: React.FC<PropTypes> = ({ onClick, frontContent, backContent })
 
   return (
     <div className={styles.container}>
-      <div className={styles.flipper}>
-        <button className={frontStyles.join(' ')} onClick={onClick}>
-          {frontContent}
-        </button>
+      <div className={styles.flipper} onClick={onClick}>
+        <button className={frontStyles.join(' ')}>{frontContent}</button>
 
-        <button className={backStyles.join(' ')} onClick={onClick}>
-          {backContent}
-        </button>
+        <button className={backStyles.join(' ')}>{backContent}</button>
       </div>
     </div>
   )
