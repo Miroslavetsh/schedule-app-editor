@@ -1,14 +1,14 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { FormPattern } from '@components/Form'
 import SingleSelect from '@components/SingleSelect'
 import Block from '@components/Block'
-
+// models
 import Subject from '@models/Subject'
 import Teacher from '@models/Teacher'
-
-import getItemsFromAPI from '@src/utils/services/getItemsFromAPI'
-import curry from '@src/utils/curry'
+// utils
+import getItemsFromAPI from '@utils/services/getItemsFromAPI'
+import curry from '@utils/curry'
 
 type PropTypes = {
   teachers: Array<Teacher>
@@ -50,6 +50,7 @@ const ChooseTeacher: React.FC<PropTypes> = ({ teachers }) => {
         heading={`Предмети викладача ${nameInHeading}`}
         isLoading={isLoading}
         items={subjects}
+        tableName='subjects'
       />
     </FormPattern>
   )
