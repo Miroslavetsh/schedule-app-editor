@@ -3,7 +3,7 @@ import { JSDOM } from 'jsdom'
 
 export default async (fullName: string) => {
   try {
-    const [firstName, secondName] = fullName.split(' ').reverse()
+    const [secondName, firstName] = fullName.split(' ').reverse()
     const name = `${firstName} ${secondName}`
 
     const { data } = await axios.get('https://slovnyk.ua/names.php', {
