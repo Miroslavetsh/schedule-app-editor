@@ -1,21 +1,20 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-
-import CssBaseline from '@mui/material/CssBaseline'
 import { CacheProvider, EmotionCache } from '@emotion/react'
+import CssBaseline from '@mui/material/CssBaseline'
+
 import createEmotionCache from '@src/createEmotionCache'
+import Layout from '@components/Layouts'
 
 import '../styles/globals.scss'
 
-interface PropTypes extends AppProps {
+type PropTypes = AppProps & {
   emotionCache?: EmotionCache
 }
 
 const clientSideEmotionCache = createEmotionCache()
 
-const MyApp = (props: PropTypes) => {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
-
+const MyApp = ({ Component, emotionCache = clientSideEmotionCache, pageProps }: PropTypes) => {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
@@ -23,7 +22,10 @@ const MyApp = (props: PropTypes) => {
       </Head>
 
       <CssBaseline />
-      <Component {...pageProps} />
+
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </CacheProvider>
   )
 }
