@@ -6,7 +6,7 @@ import Loader from '@src/components/Loader'
 import Entity from '@models/Entity'
 import TableName from '@utils/TableName'
 
-import styles from 'Styles.module.scss'
+import styles from './Styles.module.scss'
 
 type PropTypes<T extends Entity> = {
   items: Array<T>

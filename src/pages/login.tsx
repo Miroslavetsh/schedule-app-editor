@@ -19,7 +19,7 @@ const Login: NextPage<PropTypes> = () => {
 
       <>login page</>
 
-      <button onClick={signIn}>singIn</button>
+      {/* <button onClick={signIn}>singIn</button> */}
 
       <FlipButton
         onClick={() => {
