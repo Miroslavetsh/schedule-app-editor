@@ -13,8 +13,20 @@ datasource db {
   referentialIntegrity = "prisma"
 }
 
-model TeahcerSuggestion {
-  id       String @id @default(cuid())
+model Teacher {
+  id       String  @id @default(cuid())
+  email    String  @db.VarChar(50)
   name     String
   password String
+  Token    Token[]
+
+  @@unique([email])
+}
+
+model Token {
+  id           String @id @default(cuid())
+  teacherId    String
+  refreshToken String
+
+  teacher Teacher @relation(references: [id], fields: [teacherId])
 }

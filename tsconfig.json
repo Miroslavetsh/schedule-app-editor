@@ -17,10 +17,12 @@
     "baseUrl": ".",
     "jsxImportSource": "@emotion/react",
     "paths": {
-      "@components/*": ["components/*"],
-      "@models/*": ["models/*"],
+      "@components/*": ["src/components/*"],
+      "@models/*": ["server/models/*"],
       "@src/*": ["src/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@services/*": ["server/services/*"],
+      "@controllers/*": ["server/controllers/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
