@@ -4,13 +4,14 @@ import tokenService from '@services/Token'
 import TeacherModel from '@models/TeacherRegistered'
 import postItemToAPI from './redis/postItemToAPI'
 import TeacherDTO from '@models/TeacherDTO'
+import ApiError from '@models/ApiError'
 import prisma from '../prisma'
 
 class TeacherService {
   async register(email: string, name: string, password: string) {
     const candidate = await prisma.teacher.findFirst({ where: { email } })
 
-    if (candidate) throw new Error('Teacher with this email already exists')
+    if (candidate) throw ApiError.BadRequest('Teacher with this email already exists')
 
     const newCandidate = new TeacherModel(email, name, password)
     const hashPassword = await bcrypt.hash(password, 3)

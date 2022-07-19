@@ -2,8 +2,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { setCookie } from 'cookies-next'
 
 import teacherService from '@services/Teacher'
+import withErrorHandling from 'server/middlewares/withErrorHandling'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default withErrorHandling(async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     try {
       const { email, name, password } = req.body
@@ -26,4 +27,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   } else {
     res.status(405).send('Method Not Allowed')
   }
-}
+})
