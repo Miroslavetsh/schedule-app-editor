@@ -15,7 +15,7 @@ const ObjectTemplate = <T extends Entity>({
   tableName,
 }: ObjectTemplateProps<T>): JSX.Element => {
   const deleteEntity = () => {
-    curry<string>(deleteItemFromAPI)(tableName, entity.id)
+    deleteItemFromAPI(tableName, entity.id)
   }
 
   return (
