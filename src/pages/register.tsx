@@ -1,21 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
 import { useEffect } from 'react'
 
 import FlipButton from '@src/components/FlipButton'
 
 type PropTypes = {}
 
-const Registration: NextPage<PropTypes> = () => {
+const Register: NextPage<PropTypes> = () => {
   const router = useRouter()
-
-  const session = useSession()
-
-  useEffect(() => {
-    session ?? router.push('/login')
-  })
 
   return (
     <>
@@ -23,7 +16,7 @@ const Registration: NextPage<PropTypes> = () => {
         <title>Скедьюлер | Реєстрація</title>
       </Head>
 
-      <>registration page</>
+      <>register page</>
 
       <FlipButton
         onClick={() => {
@@ -42,4 +35,4 @@ export async function getStaticProps() {
   }
 }
 
-export default Registration
+export default Register

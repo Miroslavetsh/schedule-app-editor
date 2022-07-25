@@ -35,6 +35,30 @@ class TeacherService {
       teacher: new TeacherDTO(teacherDTO.id, teacherDTO.name),
     }
   }
+
+  async login(email: string, password: string) {
+    const candidate = await prisma.teacher.findFirst({ where: { email } })
+
+    if (!candidate) throw ApiError.BadRequest('Teacher with this email was not found')
+
+    const isPasswordEquals = await bcrypt.compare(password, candidate.password)
+
+    if (!isPasswordEquals) throw ApiError.BadRequest('Password is incorrect')
+
+    const token = await prisma.token.findFirst({ where: { teacherId: candidate.id } })
+    const { accessToken, refreshToken } = tokenService.generateTokens(candidate)
+
+    if (token) {
+      const { id } = token
+      prisma.token.update({ where: { id }, data: { refreshToken } })
+    }
+
+    return {
+      accessToken,
+      refreshToken,
+      teacher: new TeacherDTO(candidate.id, candidate.name),
+    }
+  }
 }
 
 export default new TeacherService()
