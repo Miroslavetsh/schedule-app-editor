@@ -18,6 +18,4 @@ export default class TeacherRegistered implements ITeacherRegistered {
     this.name = name
     this.password = password
   }
-
-  findOne() {}
 }
